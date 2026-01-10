@@ -36,3 +36,99 @@
     transform: rotate(360deg);
   }
 }
+/* Container for summary cards */
+.summary-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+/* Each card */
+.card {
+  background-color: #f3f4f6; /* light gray */
+  padding: 20px;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+/* Hover effect for cards */
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Expense list styling */
+.expenses-list {
+  margin-top: 30px;
+}
+
+/* Each expense row */
+.expense-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+/* Hover effect for expense row */
+.expense-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Input and form styling */
+form input,
+form select {
+  padding: 8px 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+form button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+form button:hover {
+  background-color: #1d4ed8;
+}
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button:hover {
+  background-color: #1d4ed8;
+}
