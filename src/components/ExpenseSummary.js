@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../api";
+
 
 function ExpenseSummary({ refreshKey }) {
   const [summary, setSummary] = useState({ total: 0, today: 0, thisMonth: 0 });
@@ -6,7 +8,7 @@ function ExpenseSummary({ refreshKey }) {
     // This is where your fetch line goes
     const fetchSummary = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/expenses/summary-expense");
+        const response = await fetch(`${API_BASE_URL}/api/expenses/summary-expense`);
         const data = await response.json();
         console.log("SUMMARY API RESPONSE 👉", data); 
         setSummary(data);

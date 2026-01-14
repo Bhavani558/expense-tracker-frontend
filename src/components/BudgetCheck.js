@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "../api";
+
+
 
 function BudgetCheck({ refreshKey }) {
   const [budget, setBudget] = useState("");
@@ -9,7 +12,7 @@ function BudgetCheck({ refreshKey }) {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/expenses/budget-check?budget=${budget}`
+        `${API_BASE_URL}/api/expenses/budget-check?budget=${budget}`
       );
       const data = await response.json();
       setResult(data);

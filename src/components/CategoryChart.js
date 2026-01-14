@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from "recharts";
+import { API_BASE_URL } from "../api";
+
 
 function CategoryChart() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/expenses/category-summary")
+    fetch(`${API_BASE_URL}/api/expenses/category-summary`)
       .then((res) => res.json())
       .then((result) => {
         const chartData = Object.keys(result).map((key) => ({

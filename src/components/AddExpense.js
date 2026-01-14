@@ -1,4 +1,6 @@
 import React, { useState,useEffect} from "react";
+import { API_BASE_URL } from "../api";
+
 
 function AddExpense({ refreshData, expenseToEdit, setExpenseToEdit }) {
   const [title, setTitle] = useState("");
@@ -29,7 +31,7 @@ function AddExpense({ refreshData, expenseToEdit, setExpenseToEdit }) {
     if (expenseToEdit) {
       // UPDATE (PUT)
       await fetch(
-        `http://localhost:8080/api/expenses/${expenseToEdit.id}`,
+        `${API_BASE_URL}/api/expenses/${expenseToEdit.id}`,
         {
           method: "PUT",
           headers: {
@@ -43,7 +45,7 @@ function AddExpense({ refreshData, expenseToEdit, setExpenseToEdit }) {
       setExpenseToEdit(null);
     } else {
       // ADD (POST)
-      await fetch("http://localhost:8080/api/expenses", {
+      await fetch(`${API_BASE_URL}/api/expenses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

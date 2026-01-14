@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-
+import { API_BASE_URL } from "../api";
 
 function Myexpenses({ refreshKey, setExpenseToEdit }) {
   const [expenses, setExpenses] = useState([]);
@@ -13,19 +13,22 @@ function Myexpenses({ refreshKey, setExpenseToEdit }) {
         title: searchText || "",
       }).toString();
 
-      const response = await fetch(
-        `http://localhost:8080/api/expenses/filter?${query}`
-      );
+      const response = await fetch(`${API_BASE_URL}/api/expenses/filter?${query}`);
       const data = await response.json();
-      setExpenses(data);
+
+      // ✅ Make sure expenses is always an array
+      const expensesArray = Array.isArray(data) ? data : data.expenses || [];
+      setExpenses(expensesArray);
+
     } catch (error) {
       console.error("Error fetching expenses:", error);
+      setExpenses([]); // fallback so map won't crash
     }
   }, [selectedCategory, searchText]);
 
   useEffect(() => {
     fetchExpenses();
-  }, [fetchExpenses,refreshKey]);
+  }, [fetchExpenses, refreshKey]);
 
   const getCategoryColor = (category) => {
     switch (category) {
@@ -83,23 +86,20 @@ function Myexpenses({ refreshKey, setExpenseToEdit }) {
             </span>{" "}
             | {exp.date}
             <div style={{ marginTop: "5px", display: "flex", gap: "8px" }}>
-  <button onClick={() => setExpenseToEdit(exp)}>
-    Edit
-  </button>
+              <button onClick={() => setExpenseToEdit(exp)}>Edit</button>
 
-  <button
-    onClick={async () => {
-      await fetch(`http://localhost:8080/api/expenses/${exp.id}`, {
-        method: "DELETE",
-      });
-      fetchExpenses();
-    }}
-    style={{ backgroundColor: "#dc2626", color: "white" }}
-  >
-    Delete
-  </button>
-</div>
-
+              <button
+                onClick={async () => {
+                  await fetch(`${API_BASE_URL}/api/expenses/${exp.id}`, {
+                    method: "DELETE",
+                  });
+                  fetchExpenses();
+                }}
+                style={{ backgroundColor: "#dc2626", color: "white" }}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))
       )}
@@ -108,4 +108,3 @@ function Myexpenses({ refreshKey, setExpenseToEdit }) {
 }
 
 export default Myexpenses;
-
